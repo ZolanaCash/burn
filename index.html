@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pump Or Treat</title>
+    <title>Operation Free DexScreener</title>
+    <link rel="icon" type="image/x-icon" href="dex.png">
     <style>
         * {
             margin: 0;
@@ -12,581 +13,532 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: #ffffff;
-            color: #134e4a;
             min-height: 100vh;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            right: 0;
-            padding: 30px 40px;
             display: flex;
-            gap: 20px;
-            z-index: 100;
-        }
-
-        .nav-btn {
-            padding: 12px 28px;
-            background: #10b981;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95em;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .nav-btn:hover {
-            background: #059669;
-            transform: translateY(-2px);
-        }
-
-        /* Main container */
-        .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 100px 40px 60px;
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 80px;
-            align-items: start;
-        }
-
-        /* Left side - Info */
-        .info-side {
-            position: sticky;
-            top: 100px;
-        }
-
-        .logo {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            font-size: 3.5em;
-            font-weight: 700;
-            color: #059669;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-        }
-
-        .description {
-            font-size: 1.15em;
-            line-height: 1.8;
-            color: #065f46;
-            margin-bottom: 30px;
-        }
-
-        .highlight {
-            color: #10b981;
-            font-weight: 600;
-        }
-
-        .timer-display {
-            margin-top: 50px;
-            padding: 30px;
-            background: #f0fdf4;
-            border-radius: 12px;
-            border: 2px solid #10b981;
-        }
-
-        .timer-label {
-            font-size: 0.9em;
-            color: #047857;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .countdown {
-            font-size: 4em;
-            font-weight: 700;
-            color: #10b981;
-            font-family: 'SF Mono', monospace;
-        }
-
-        /* Right side - Holder table */
-        .holders-side {
-            background: #f9fafb;
-            border-radius: 16px;
-            padding: 40px;
-            border: 1px solid #d1fae5;
-        }
-
-        .table-header {
-            display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            margin-bottom: 25px;
+            justify-content: center;
+            color: #000000;
+            padding: 20px;
         }
 
-        .table-title {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #047857;
-        }
-
-        .market-cap {
-            font-size: 0.95em;
-            color: #065f46;
-            background: #ecfdf5;
-            padding: 8px 16px;
-            border-radius: 6px;
-        }
-
-        .holders-table {
+        .container {
+            text-align: center;
+            max-width: 900px;
             width: 100%;
         }
 
-        .table-head {
-            display: grid;
-            grid-template-columns: 0.8fr 1.2fr 1fr 1fr;
-            padding: 12px 16px;
-            background: #ecfdf5;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            font-size: 0.85em;
-            font-weight: 600;
-            color: #047857;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .holder-row {
-            display: grid;
-            grid-template-columns: 0.8fr 1.2fr 1fr 1fr;
-            padding: 16px;
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            border: 1px solid #d1fae5;
-            transition: all 0.3s ease;
-        }
-
-        .holder-row:hover {
-            border-color: #10b981;
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
-        }
-
-        .holder-row.highlight-update {
-            animation: flashGreen 0.6s ease;
-        }
-
-        @keyframes flashGreen {
-            0%, 100% { background: white; }
-            50% { background: #d1fae5; }
-        }
-
-        .rank {
-            color: #6b7280;
-            font-weight: 600;
-        }
-
-        .address {
-            font-family: 'SF Mono', monospace;
-            font-size: 0.9em;
-            color: #047857;
-        }
-
-        .holdings {
-            font-weight: 600;
-            color: #065f46;
-        }
-
-        .airdrop {
+        h1 {
+            font-size: 3.5rem;
             font-weight: 700;
-            color: #10b981;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            color: #000000;
         }
 
-        .airdrop.updated {
-            animation: pulse 0.6s ease;
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666666;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .circle-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 3rem;
+        }
+
+        .circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 0 0 8px #000000,
+                0 8px 32px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .circle::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.03) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
         }
 
-        /* Docs page */
-        .docs-page {
-            display: none;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 120px 40px 60px;
-        }
-
-        .docs-page.active {
-            display: block;
-        }
-
-        .docs-header {
-            margin-bottom: 50px;
-        }
-
-        .docs-title {
-            font-size: 3em;
+        .fee-amount {
+            font-size: 3.5rem;
             font-weight: 700;
-            color: #059669;
-            margin-bottom: 20px;
+            color: #000000;
+            z-index: 1;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .docs-section {
-            margin-bottom: 50px;
+        .fee-amount.updating {
+            transform: scale(1.05);
         }
 
-        .docs-section h2 {
-            font-size: 1.8em;
-            color: #047857;
-            margin-bottom: 15px;
+        .update-indicator {
+            font-size: 0.9rem;
+            color: #666666;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        .top-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .x-button, .docs-button {
+            background: #000000;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            padding: 12px 24px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .x-button:hover, .docs-button:hover {
+            background: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .x-button svg, .docs-button svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .docs-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .docs-modal.active {
+            display: flex;
+        }
+
+        .docs-content {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 2px solid #000000;
+            position: relative;
+        }
+
+        .close-docs {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #000000;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .close-docs:hover {
+            transform: scale(1.1);
+        }
+
+        .docs-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .docs-content h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .docs-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #333333;
+        }
+
+        .docs-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .docs-content li {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+            color: #333333;
+        }
+
+        .docs-content strong {
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .docs-highlight {
+            background: #f8f8f8;
+            border-left: 4px solid #000000;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .info-section {
+            background: #f8f8f8;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            border: 2px solid #000000;
+        }
+
+        .info-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .info-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #333333;
+            text-align: left;
+        }
+
+        .info-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            background: #000000;
+            color: #ffffff;
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
             font-weight: 600;
         }
 
-        .docs-section p {
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: #065f46;
-            margin-bottom: 15px;
-        }
-
-        .docs-section ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .docs-section li {
-            padding: 12px 0;
-            border-bottom: 1px solid #d1fae5;
-            font-size: 1.05em;
-            color: #065f46;
-            line-height: 1.6;
-        }
-
-        .docs-section li:last-child {
-            border-bottom: none;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .main-container {
-                grid-template-columns: 1fr;
-                gap: 50px;
-                padding: 80px 30px 40px;
-            }
-
-            .info-side {
-                position: relative;
-                top: 0;
-            }
-
+        @media (max-width: 768px) {
             h1 {
-                font-size: 2.5em;
+                font-size: 2.5rem;
             }
 
-            .countdown {
-                font-size: 3em;
+            .subtitle {
+                font-size: 1rem;
             }
 
-            .table-head, .holder-row {
-                grid-template-columns: 0.6fr 1fr 0.9fr 0.9fr;
-                font-size: 0.85em;
-            }
-        }
-
-        @media (max-width: 640px) {
-            nav {
-                padding: 20px;
+            .circle-container {
+                width: 220px;
+                height: 220px;
             }
 
-            .nav-btn {
-                padding: 10px 20px;
-                font-size: 0.9em;
+            .fee-amount {
+                font-size: 2.5rem;
             }
 
-            .holders-side {
-                padding: 25px 20px;
+            .info-section {
+                padding: 1.5rem;
             }
 
-            .table-head, .holder-row {
-                font-size: 0.75em;
-                padding: 12px 10px;
+            .top-buttons {
+                top: 15px;
+                right: 15px;
+                flex-direction: column;
+                gap: 8px;
             }
 
-            .address {
-                font-size: 0.8em;
+            .x-button, .docs-button {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+
+            .x-button svg, .docs-button svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .docs-content {
+                padding: 2rem;
+            }
+
+            .docs-content h2 {
+                font-size: 2rem;
+            }
+
+            .docs-content h3 {
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <button class="nav-btn" onclick="showDocs()">Docs</button>
-        <a href="https://x.com/pumpandtreat" target="_blank" class="nav-btn">X</a>
-    </nav>
+    <div class="top-buttons">
+        <button class="docs-button" id="docsButton">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            Docs
+        </button>
+        <a href="https://x.com/freedexsol" target="_blank" rel="noopener noreferrer" class="x-button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+            </svg>
+            Follow Us
+        </a>
+    </div>
 
-    <!-- Main page -->
-    <div id="mainPage">
-        <div class="main-container">
-            <!-- Left side - Info -->
-            <div class="info-side">
-                <img src="wat.png" alt="Pump Or Treat" class="logo">
-                <h1>Pump Or Treat</h1>
-                <div class="description">
-                    <p style="margin-bottom: 20px;">
-                        The fairest token distribution mechanism on Solana. Every <span class="highlight">120 seconds</span>, 
-                        all holders automatically receive their share of trading fees.
-                    </p>
-                    <p style="margin-bottom: 20px;">
-                        Starting at just <span class="highlight">5k market cap</span>, holders earn proportional rewards 
-                        based on their token holdings. The more you hold, the more you earn.
-                    </p>
-                    <p>
-                        Built entirely on <span class="highlight">pump.fun</span> for seamless, automated distributions. 
-                        No claiming required—rewards appear directly in your wallet.
-                    </p>
-                </div>
+    <div class="docs-modal" id="docsModal">
+        <div class="docs-content">
+            <button class="close-docs" id="closeDocs">&times;</button>
+            <h2>Documentation</h2>
+            <p style="color: #666666; margin-bottom: 2rem;">Understanding Operation Free DexScreener</p>
 
-                <div class="timer-display">
-                    <div class="timer-label">Next Airdrop In</div>
-                    <div class="countdown" id="countdown">120</div>
-                </div>
+            <h3>The Problem</h3>
+            <p>
+                Traditionally, getting your token listed on DexScreener requires a manual payment. This creates an immediate financial barrier for new projects and developers. Many promising tokens never get the visibility they deserve simply because they can't afford the upfront listing fee. This system favors those with capital over those with innovation.
+            </p>
+
+            <h3>Our Solution</h3>
+            <p>
+                Operation Free DexScreener eliminates this barrier entirely. We've built an automated system that uses platform fees to pay for DexScreener listings on every bonded coin. When your token bonds on our platform, it automatically gets listed on DexScreener without any action or payment required from you.
+            </p>
+
+            <div class="docs-highlight">
+                <strong>Key Point:</strong> Every bonded coin gets free DexScreener listing automatically. No manual payments. No applications. No waiting.
             </div>
 
-            <!-- Right side - Holders table -->
-            <div class="holders-side">
-                <div class="table-header">
-                    <div class="table-title">Live Holders</div>
-                    <div class="market-cap">Market Cap: <strong id="marketCap">$5,000</strong></div>
-                </div>
+            <h3>How The Technical Process Works</h3>
+            <p>
+                Our platform operates on a simple but powerful fee structure. When transactions occur on the platform, a small fee is collected. Instead of these fees going solely to buybacks or development, we've allocated a portion specifically for DexScreener payments.
+            </p>
+            
+            <p>
+                Here's the step-by-step process:
+            </p>
+            <ul>
+                <li><strong>Fee Collection:</strong> Platform fees are collected automatically from transactions in real-time</li>
+                <li><strong>Pool Accumulation:</strong> These fees accumulate in a dedicated pool visible on our homepage</li>
+                <li><strong>Bonding Trigger:</strong> When a token reaches bonding status on our platform, it triggers our automated listing system</li>
+                <li><strong>Automatic Payment:</strong> Our system immediately allocates the required amount from the fee pool to cover the DexScreener listing cost</li>
+                <li><strong>Instant Listing:</strong> The token gets listed on DexScreener without any manual intervention</li>
+            </ul>
 
-                <div class="holders-table">
-                    <div class="table-head">
-                        <div>Rank</div>
-                        <div>Address</div>
-                        <div>Holdings</div>
-                        <div>Airdrop</div>
-                    </div>
-                    <div id="holdersList"></div>
-                </div>
+            <h3>Benefits For The Community</h3>
+            <p>
+                This approach creates a level playing field where success is determined by community support and project quality rather than upfront capital. New developers can launch tokens knowing they'll get professional visibility from day one. Holders benefit because their tokens automatically gain credibility and discoverability through DexScreener listings.
+            </p>
+
+            <p>
+                The system is completely transparent. The fee counter you see on our homepage shows the real-time accumulation of the pool that funds these listings. Every token that bonds benefits equally from this community resource.
+            </p>
+
+            <h3>Sustainability</h3>
+            <p>
+                The model is designed to be self-sustaining. As platform activity increases, the fee pool grows proportionally. This ensures that we can continue offering free DexScreener listings indefinitely without compromising the service quality or availability. The more the platform grows, the stronger this benefit becomes for the entire community.
+            </p>
+
+            <div class="docs-highlight">
+                <strong>Result:</strong> A completely automated, sustainable system that democratizes access to professional token visibility for every project on our platform.
             </div>
         </div>
     </div>
 
-    <!-- Docs page -->
-    <div id="docsPage" class="docs-page">
-        <div class="docs-header">
-            <h1 class="docs-title">Documentation</h1>
-            <button class="nav-btn" onclick="showMain()" style="margin-bottom: 30px;">← Back to Home</button>
+    <div class="container">
+        <h1>Operation Free DexScreener</h1>
+        <p class="subtitle">Making DexScreener free for every bonded coin</p>
+        
+        <div class="circle-container">
+            <div class="circle">
+                <div class="fee-amount" id="feeAmount">$0</div>
+            </div>
+        </div>
+        
+        <div class="update-indicator" id="updateIndicator">
+            Updates every 5 seconds
         </div>
 
-        <div class="docs-section">
-            <h2>What is Pump Or Treat?</h2>
-            <p>
-                Pump Or Treat is an innovative token distribution mechanism built on pump.fun that automatically 
-                rewards holders every 120 seconds with their proportional share of trading fees.
-            </p>
-        </div>
-
-        <div class="docs-section">
+        <div class="info-section">
             <h2>How It Works</h2>
-            <ul>
-                <li><strong>Automatic Rewards:</strong> Every 120 seconds, accumulated trading fees are distributed to all token holders</li>
-                <li><strong>Proportional Distribution:</strong> Your airdrop amount is based on your percentage of total token supply</li>
-                <li><strong>No Claiming Required:</strong> Rewards appear directly in your wallet automatically</li>
-                <li><strong>Fair Launch:</strong> Starting market cap of just $5,000 ensures early holders get maximum benefits</li>
-            </ul>
-        </div>
+            <p>
+                We automatically use platform fees to pay for <span class="highlight">DexScreener listings</span> on every bonded coin. This means free visibility for everyone — no manual payments, no barriers to entry. Your token gets listed automatically when it bonds, giving it the exposure it deserves from day one.
+            </p>
 
-        <div class="docs-section">
-            <h2>Token Economics</h2>
-            <ul>
-                <li><strong>Starting Market Cap:</strong> $5,000</li>
-                <li><strong>Distribution Interval:</strong> 120 seconds</li>
-                <li><strong>Fee Structure:</strong> Trading fees accumulate and are distributed proportionally</li>
-                <li><strong>Initial Airdrops:</strong> Starting at ~0.01 SOL, scaling with market cap growth</li>
-            </ul>
-        </div>
+            <p>
+                Platform fees are automatically allocated to cover DexScreener costs for every bonded coin. No action is required from developers or holders — the system handles everything seamlessly in the background.
+            </p>
 
-        <div class="docs-section">
-            <h2>Getting Started</h2>
-            <ul>
-                <li>Purchase Pump Or Treat tokens on pump.fun</li>
-                <li>Hold tokens in your wallet</li>
-                <li>Receive automatic airdrops every 120 seconds</li>
-                <li>Watch your rewards grow as trading volume increases</li>
-            </ul>
-        </div>
+            <p>
+                Every bonded token gets instant DexScreener listing without manual payment, giving equal opportunity for market exposure and discovery. This removes the traditional barrier where only projects with upfront capital could afford professional listing services.
+            </p>
 
-        <div class="docs-section">
-            <h2>FAQ</h2>
-            <p><strong>Q: Do I need to claim my rewards?</strong></p>
-            <p>A: No, all airdrops are sent automatically to your wallet every 120 seconds.</p>
-            
-            <p style="margin-top: 20px;"><strong>Q: How is my airdrop amount calculated?</strong></p>
-            <p>A: Your airdrop is proportional to your token holdings. If you hold 1% of the total supply, you receive 1% of the airdrop pool.</p>
-            
-            <p style="margin-top: 20px;"><strong>Q: When do airdrops start?</strong></p>
-            <p>A: Airdrops begin immediately after launch and continue every 120 seconds as long as there is trading activity.</p>
+            <p>
+                By removing the DexScreener payment barrier, we create a level playing field where every project has the same professional visibility from launch. This community-first approach ensures that good projects aren't held back by financial constraints, but can compete based on their merits and community support.
+            </p>
         </div>
     </div>
 
     <script>
-        // Timer countdown
-        let timeLeft = 120;
-        const countdownElement = document.getElementById('countdown');
+        const STORAGE_KEY = 'operation_dexscreener_fee_amount';
+        let currentFee = 0.00;
+        const feeElement = document.getElementById('feeAmount');
+        const updateIndicator = document.getElementById('updateIndicator');
+        const docsModal = document.getElementById('docsModal');
+        const docsButton = document.getElementById('docsButton');
+        const closeDocs = document.getElementById('closeDocs');
 
-        function updateCountdown() {
-            countdownElement.textContent = timeLeft;
-            timeLeft--;
+        // Docs modal functionality
+        docsButton.addEventListener('click', () => {
+            docsModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeDocs.addEventListener('click', () => {
+            docsModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        docsModal.addEventListener('click', (e) => {
+            if (e.target === docsModal) {
+                docsModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Load saved fee from localStorage
+        function loadSavedFee() {
+            const savedFee = localStorage.getItem(STORAGE_KEY);
+            if (savedFee !== null) {
+                currentFee = parseFloat(savedFee);
+            }
+        }
+
+        // Save fee to localStorage
+        function saveFee() {
+            localStorage.setItem(STORAGE_KEY, currentFee.toString());
+        }
+
+        function formatCurrency(amount) {
+            return `$${amount.toFixed(2)}`;
+        }
+
+        function generateRandomIncrement() {
+            // Generate a random increment between $0.01 and $0.99
+            return (Math.random() * 0.98 + 0.01);
+        }
+
+        function updateFee() {
+            // Add animation class
+            feeElement.classList.add('updating');
             
-            if (timeLeft < 0) {
-                timeLeft = 120;
-                distributeAirdrops();
-            }
-        }
-
-        setInterval(updateCountdown, 1000);
-
-        // Generate holders
-        function generateAddress() {
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz123456789';
-            let address = '';
-            for (let i = 0; i < 8; i++) {
-                address += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return address + '...' + chars.charAt(Math.floor(Math.random() * chars.length)) + 
-                   chars.charAt(Math.floor(Math.random() * chars.length)) + 
-                   chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-
-        // Start with empty holders array
-        const holders = [];
-        const maxHolders = 15;
-
-        function renderHolders() {
-            const holdersList = document.getElementById('holdersList');
-            holdersList.innerHTML = '';
-
-            if (holders.length === 0) {
-                holdersList.innerHTML = '<div style="text-align: center; padding: 40px; color: #9ca3af;">No holders yet...</div>';
-                return;
-            }
-
-            holders.forEach(holder => {
-                const row = document.createElement('div');
-                row.className = 'holder-row';
-                row.innerHTML = `
-                    <div class="rank">#${holder.rank}</div>
-                    <div class="address">${holder.address}</div>
-                    <div class="holdings">${holder.holdings}</div>
-                    <div class="airdrop" data-address="${holder.address}">◎ ${holder.airdrop.toFixed(4)}</div>
-                `;
-                holdersList.appendChild(row);
-                holder.element = row;
-            });
-        }
-
-        function addNewHolder() {
-            if (holders.length >= maxHolders) return;
-
-            const newHolder = {
-                rank: holders.length + 1,
-                address: generateAddress(),
-                holdings: (Math.random() * 12 + 2).toFixed(2) + '%',
-                holdingsPercent: (Math.random() * 12 + 2),
-                airdrop: 0,
-                element: null
-            };
-
-            holders.push(newHolder);
-
-            // Sort by holdings
-            holders.sort((a, b) => b.holdingsPercent - a.holdingsPercent);
-            holders.forEach((holder, i) => holder.rank = i + 1);
-
-            renderHolders();
-        }
-
-        function distributeAirdrops() {
-            if (holders.length === 0) return;
-
-            // Base amount increases slightly over time
-            const baseAmount = 0.008 + (Math.random() * 0.004);
-            
-            holders.forEach(holder => {
-                const airdropAmount = baseAmount * (holder.holdingsPercent / 100);
-                holder.airdrop += airdropAmount;
+            // Update the fee after a brief moment
+            setTimeout(() => {
+                const increment = generateRandomIncrement();
+                currentFee += increment;
+                feeElement.textContent = formatCurrency(currentFee);
                 
-                if (holder.element) {
-                    const airdropCell = holder.element.querySelector('.airdrop');
-                    airdropCell.textContent = `◎ ${holder.airdrop.toFixed(4)}`;
-                    airdropCell.classList.add('updated');
-                    holder.element.classList.add('highlight-update');
-                    
-                    setTimeout(() => {
-                        airdropCell.classList.remove('updated');
-                        holder.element.classList.remove('highlight-update');
-                    }, 600);
-                }
-            });
+                // Save to localStorage
+                saveFee();
+                
+                // Remove animation class
+                setTimeout(() => {
+                    feeElement.classList.remove('updating');
+                }, 300);
+            }, 150);
+
+            // Update the indicator
+            updateIndicator.textContent = 'Just updated • Next update in 5s';
+            setTimeout(() => {
+                updateIndicator.textContent = 'Updates every 5 seconds';
+            }, 2000);
         }
 
-        // Slowly update random holder holdings
-        function updateHolderHoldings() {
-            if (holders.length === 0) return;
+        // Load saved fee on page load
+        loadSavedFee();
 
-            const randomIndex = Math.floor(Math.random() * holders.length);
-            const changePercent = (Math.random() - 0.5) * 0.5; // Small change
-            holders[randomIndex].holdingsPercent += changePercent;
-            holders[randomIndex].holdingsPercent = Math.max(0.5, Math.min(20, holders[randomIndex].holdingsPercent));
-            holders[randomIndex].holdings = holders[randomIndex].holdingsPercent.toFixed(2) + '%';
-            
-            // Re-sort and re-render
-            holders.sort((a, b) => b.holdingsPercent - a.holdingsPercent);
-            holders.forEach((holder, i) => holder.rank = i + 1);
-            renderHolders();
-        }
+        // Set initial display
+        feeElement.textContent = formatCurrency(currentFee);
 
-        // Add new holders gradually - one every 3-6 seconds
-        function startAddingHolders() {
-            if (holders.length < maxHolders) {
-                addNewHolder();
-                const nextDelay = Math.random() * 3000 + 3000; // 3-6 seconds
-                setTimeout(startAddingHolders, nextDelay);
-            }
-        }
+        // First update after 5 seconds
+        setTimeout(() => {
+            updateFee();
+            // Then continue updating every 5 seconds
+            setInterval(updateFee, 5000);
+        }, 5000);
 
-        // Update holdings every 8-15 seconds (only after we have holders)
+        // Countdown display (optional enhancement)
+        let countdown = 5;
         setInterval(() => {
-            if (holders.length > 0) {
-                updateHolderHoldings();
+            countdown--;
+            if (countdown <= 0) {
+                countdown = 5;
             }
-        }, Math.random() * 7000 + 8000);
-
-        // Navigation functions
-        function showDocs() {
-            document.getElementById('mainPage').style.display = 'none';
-            document.getElementById('docsPage').classList.add('active');
-        }
-
-        function showMain() {
-            document.getElementById('mainPage').style.display = 'block';
-            document.getElementById('docsPage').classList.remove('active');
-        }
-
-        // Initial render
-        renderHolders();
-
-        // Start adding holders after 2 seconds
-        setTimeout(startAddingHolders, 2000);
+        }, 1000);
     </script>
 </body>
 </html>
