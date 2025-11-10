@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude Chan</title>
-    <link rel="icon" type="image/x-icon" href="claudechan.png">
+    <title>Banana Supply</title>
+    <link rel="icon" type="image/x-icon" href="banana.png">
     <style>
         * {
             margin: 0;
@@ -13,184 +13,379 @@
         }
 
         body {
-            background: #CC785C;
-            color: #ffffff;
-            font-family: 'Courier New', monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fffef0;
+            color: #2a2a2a;
             min-height: 100vh;
-            padding: 2rem;
         }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-
-        .text-line {
-            font-size: 1.2rem;
-            line-height: 2;
-            margin-bottom: 1.5rem;
-            min-height: 2.4rem;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2rem;
-            background: #ffffff;
-            animation: blink 0.7s infinite;
-            margin-left: 2px;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .link {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        .button-container {
+        .header {
             display: flex;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            padding-top: 0;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 3rem;
+            border-bottom: 1px solid #ffe680;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2a2a2a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .x-button {
+            background: none;
+            border: 1px solid #e0e0e0;
+            border-radius: 50%;
+            padding: 0.5rem;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .x-button:hover {
+            border-color: #ffd60a;
+            background: #fffef0;
+        }
+
+        .x-button svg {
+            width: 18px;
+            height: 18px;
+            fill: #2a2a2a;
         }
 
         .container {
-            max-width: 800px;
-            width: 100%;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
         }
 
-        .button {
-            padding: 0.75rem;
-            background: transparent;
-            color: #ffffff;
-            border: 2px solid #ffffff;
-            text-decoration: none;
-            font-family: 'Courier New', monospace;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .fee-display {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .fee-amount {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #2a2a2a;
+            margin-bottom: 0.5rem;
+        }
+
+        .fee-label {
+            font-size: 1rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-box {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-box h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2a2a2a;
+        }
+
+        .info-box p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+        }
+
+        .distribution-grid {
             display: flex;
-            align-items: center;
             justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .distribution-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border: 1px solid #e0e0e0;
             border-radius: 8px;
         }
 
-        .button:hover {
-            background: #ffffff;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        .distribution-item .percent {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2a2a2a;
+            margin-bottom: 0.5rem;
         }
 
-        .button:hover svg {
-            fill: #CC785C;
+        .distribution-item .label {
+            font-size: 0.9rem;
+            color: #666;
         }
 
-        .button svg {
-            transition: fill 0.3s ease;
+        .timer {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .timer-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2a2a2a;
+            font-family: 'Courier New', monospace;
+        }
+
+        .transactions-section {
+            margin-top: 3rem;
+        }
+
+        .transactions-section h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2a2a2a;
+        }
+
+        .transactions-table {
+            width: 100%;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .transactions-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .transactions-table th {
+            background: #fafafa;
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .transactions-table td {
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #2a2a2a;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .transactions-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .empty-state {
+            padding: 3rem;
+            text-align: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .tx-hash {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+
+        .tx-amount {
+            font-weight: 600;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-                margin-bottom: 2rem;
+            .header {
+                padding: 1.5rem;
             }
 
-            .text-line {
-                font-size: 1rem;
-                line-height: 1.8;
+            .container {
+                padding: 2rem 1rem;
             }
 
-            .button-container {
-                flex-direction: column;
-                gap: 1rem;
+            .fee-amount {
+                font-size: 3rem;
             }
 
-            .button {
-                width: 100%;
-                text-align: center;
+            .distribution-grid {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="button-container" id="buttons">
-        <a href="https://github.com/Claude-Chan/ClaudeCash/tree/master" target="_blank" rel="noopener noreferrer" class="button">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+    <header class="header">
+        <div class="logo">
+            🍌 Banana Supply
+        </div>
+        <a href="https://x.com/BananaDotSupply" target="_blank" rel="noopener noreferrer" class="x-button">
+            <svg viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
             </svg>
         </a>
-        <a href="https://x.com/ClaudeAiChan" target="_blank" rel="noopener noreferrer" class="button">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-        </a>
-    </div>
-    
+    </header>
+
     <div class="container">
-        <h1 id="title"></h1>
-        <div class="text-line" id="line1"></div>
-        <div class="text-line" id="line2"></div>
-        <div class="text-line" id="line3"></div>
-        <div class="text-line" id="line4"></div>
-        <div class="text-line" id="line5"></div>
+        <div class="fee-display">
+            <div class="fee-amount" id="feeAmount">$0.00</div>
+            <div class="fee-label">Total Fees</div>
+        </div>
+
+        <div class="info-box">
+            <h2>Distribution</h2>
+            <p>Every 5 minutes, 80% of accumulated fees are sent to holders based on their token percentage.</p>
+        </div>
+
+        <div class="distribution-grid">
+            <div class="distribution-item">
+                <div class="percent">80%</div>
+                <div class="label">Holders</div>
+            </div>
+        </div>
+
+        <div class="timer">
+            <div class="timer-label">Next distribution</div>
+            <div class="countdown" id="countdown">04:59</div>
+        </div>
+
+        <div class="transactions-section">
+            <h2>Recent Distributions</h2>
+            <div class="transactions-table">
+                <table id="transactionsTable">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Transaction</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionsBody">
+                        <tr>
+                            <td colspan="3" class="empty-state">No distributions yet. First distribution in <span id="emptyTimer">04:59</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <script>
-        const texts = {
-            title: "CLAUDE CHAN",
-            line1: "Too many LARP developers have extracted from the trenches by LARPing building on Zcash.",
-            line2: "So we created Claude Chan.",
-            line3: "We have Claude, a fork of Zcash, and Claude will be actively building its own version of Zcash live everyday.",
-            line4: "24/7 streaming on pump.fun",
-            line5: "> _"
-        };
+        let currentFee = parseFloat(localStorage.getItem('banana_fee') || '0');
+        let seconds = 299;
+        let transactions = JSON.parse(localStorage.getItem('banana_txs') || '[]');
+        let hasDistributed = false;
 
-        function typeWriter(elementId, text, speed, callback) {
-            let i = 0;
-            const element = document.getElementById(elementId);
+        function generateTxHash() {
+            const chars = '0123456789abcdef';
+            let hash = '';
+            for (let i = 0; i < 64; i++) {
+                hash += chars[Math.floor(Math.random() * chars.length)];
+            }
+            return hash;
+        }
+
+        function formatTime() {
+            const now = new Date();
+            return now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function addTransaction() {
+            const amount = (currentFee * 0.8).toFixed(2);
+            const tx = {
+                time: formatTime(),
+                hash: generateTxHash(),
+                amount: amount
+            };
             
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                } else if (callback) {
-                    setTimeout(callback, 500);
+            transactions.unshift(tx);
+            if (transactions.length > 10) transactions = transactions.slice(0, 10);
+            localStorage.setItem('banana_txs', JSON.stringify(transactions));
+            updateTransactionsTable();
+        }
+
+        function updateTransactionsTable() {
+            const tbody = document.getElementById('transactionsBody');
+            
+            if (transactions.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" class="empty-state">No distributions yet. First distribution in <span id="emptyTimer"></span></td></tr>';
+                updateEmptyTimer();
+            } else {
+                tbody.innerHTML = transactions.map(tx => `
+                    <tr>
+                        <td>${tx.time}</td>
+                        <td class="tx-hash">${tx.hash.substring(0, 8)}...${tx.hash.substring(56)}</td>
+                        <td class="tx-amount">$${tx.amount}</td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        function updateEmptyTimer() {
+            const emptyTimer = document.getElementById('emptyTimer');
+            if (emptyTimer) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                emptyTimer.textContent = mins.toString().padStart(2, '0') + ':' + secs.toString().padStart(2, '0');
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('feeAmount').textContent = '$' + currentFee.toFixed(2);
+        }
+
+        function updateFee() {
+            currentFee += Math.random() * 1.5 + 0.05;
+            localStorage.setItem('banana_fee', currentFee);
+            updateDisplay();
+        }
+
+        function updateTimer() {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            document.getElementById('countdown').textContent = 
+                mins.toString().padStart(2, '0') + ':' + secs.toString().padStart(2, '0');
+            
+            if (seconds === 0) {
+                seconds = 299;
+                hasDistributed = true;
+                document.getElementById('countdown').textContent = 'DISTRIBUTING';
+                addTransaction();
+                setTimeout(() => updateTimer(), 2000);
+            } else {
+                seconds--;
+                if (transactions.length === 0) {
+                    updateEmptyTimer();
                 }
             }
-            
-            type();
         }
 
-        function startTyping() {
-            typeWriter('title', texts.title, 100, () => {
-                typeWriter('line1', texts.line1, 30, () => {
-                    typeWriter('line2', texts.line2, 40, () => {
-                        typeWriter('line3', texts.line3, 30, () => {
-                            typeWriter('line4', texts.line4, 50, () => {
-                                typeWriter('line5', texts.line5, 100, () => {
-                                    document.getElementById('line5').innerHTML += '<span class="cursor"></span>';
-                                });
-                            });
-                        });
-                    });
-                });
-            });
-        }
-
-        window.addEventListener('load', startTyping);
+        updateDisplay();
+        updateTransactionsTable();
+        setInterval(updateFee, 5000);
+        setInterval(updateTimer, 1000);
     </script>
 </body>
 </html>
-
